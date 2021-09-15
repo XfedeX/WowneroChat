@@ -1,0 +1,67 @@
+<!DOCTYPE HTML>
+
+<head>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="auth.css">
+    <title>Register to WowChat</title>
+    <script src="https://hcaptcha.com/1/api.js" async defer></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#000000">
+
+</head>
+
+<body>
+    <div class="login-page">
+        <div class="form">
+            <a id="statusTxt" style="color: darkred;"></a><br>
+            <form id="register-form" action="/register" method="POST" encType="application/x-www-form-urlencoded">
+                <input type="text" placeholder="Username" name="username" />
+                <input type="password" placeholder="Password" name="password" />
+
+
+                <button id="submitBtn" class="h-captcha" data-sitekey="f60155ce-51f7-4f9c-b8b8-5fe45f2dd269"
+                    data-callback="onSubmit">Register</button>
+                <p class="message">Already registered? <a href="login.html">Sign In</a></p>
+                <p class="message">This site is protected by hCaptcha and its <a
+                        href="https://hcaptcha.com/privacy">Privacy Policy</a> and <a
+                        href="https://hcaptcha.com/terms">Terms of Service</a> apply.</p>
+            </form>
+        </div>
+    </div>
+
+    <script type="text/javascript">
+        function onSubmit(token) {
+            document.getElementById("register-form").submit();
+        }
+        var statusTxt = document.getElementById("statusTxt")
+        switch (window.location.search) {
+            case "?wrongPw":
+                statusTxt.innerHTML = "Wrong username or password."
+                break;
+            case "?401":
+                statusTxt.innerHTML = "Unauthorized (or banned)"
+                break;
+            case "?captcha":
+                statusTxt.innerHTML = "Wrong captcha!"
+                break;
+            case "?longU":
+                statusTxt.innerHTML = "Username is too long!<br>(Max 32 characters.)"
+                break;
+            case "?longP":
+                statusTxt.innerHTML = "Password is too long!<br>(Max 128 characters.)"
+                break;
+            case "?alr":
+                statusTxt.innerHTML = "That username is already registered!"
+                break;
+            case "?inv":
+                statusTxt.innerHTML = "That username is invalid."
+                break;
+            case "?c":
+                statusTxt.innerHTML = "Your password is too short or common."
+                break;
+            default:
+                statusTxt.innerHTML = ""
+        }
+
+    </script>
+</body>

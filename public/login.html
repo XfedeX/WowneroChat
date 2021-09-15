@@ -1,0 +1,63 @@
+<!DOCTYPE HTML>
+
+<head>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="auth.css">
+    <title>Login to WowChat</title>
+    
+    <script src="https://hcaptcha.com/1/api.js" async defer></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#000000">
+
+
+</head>
+
+<body>
+    <div class="login-page">
+        <div class="form">
+            <a id="statusTxt" style="color: darkred;"></a><br>
+            <form id="login-form" action="/login" method="POST" enctype="application/x-www-form-urlencoded">
+                <input type="text" placeholder="Username" name="username" />
+                <input type="password" placeholder="Password" name="password" />
+                <button class="h-captcha" data-sitekey="f60155ce-51f7-4f9c-b8b8-5fe45f2dd269" data-callback="onSubmit" data-close-callback="onClose" data-open-callback="onOpen" id="submitBtn">login</button>
+                <p class="message">Not registered? <a href="register.html">Create an account</a></p>
+                <p class="message">This site is protected by hCaptcha and its <a href="https://hcaptcha.com/privacy">Privacy Policy</a> and <a href="https://hcaptcha.com/terms">Terms of Service</a> apply.</p>
+            </form>
+        </div>
+    </div>
+
+    <script type="text/javascript">
+        const queryStr = window.location.search;
+        const statusTxt = document.getElementById("statusTxt")
+        function onSubmit(token) {
+            document.getElementById("login-form").submit();
+        }
+        function onOpen() {
+            document.getElementById("submitBtn").disabled = true
+        }
+        function onClose() {
+            document.getElementById("submitBtn").disabled = false
+
+        }
+        switch (queryStr) {
+            case "?wrongPw":
+                statusTxt.innerHTML = "Wrong username or password."
+                break;
+            case "?401":
+                statusTxt.innerHTML = "Unauthorized (or banned)"
+                break;
+            case "?captcha":
+                statusTxt.innerHTML = "Wrong captcha!"
+                break;
+            case "?longU":
+                statusTxt.innerHTML = "Username is too long!<br>(Max 32 characters.)"
+                break;
+            case "?longP":
+                statusTxt.innerHTML = "Password is too long!<br>(Max 128 characters.)"
+                break;
+            default:
+                statusTxt.innerHTML = ""
+        }
+
+    </script>
+</body>

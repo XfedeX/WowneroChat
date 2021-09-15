@@ -1,0 +1,28 @@
+<!DOCTYPE HTML>
+
+<head>
+    <title>WowChat</title>
+    <meta name="description" content="A cool Wownero chat website.">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="/style.css">
+    <link rel="stylesheet" href="/2.css">
+    <meta name="theme-color" content="#000000">
+</head>
+
+<body>
+    <script defer src="/app.js"></script>
+
+    <div class="maindiv">
+        <h1>WowChat</h1>
+        <div class="inDiv list" oncontextmenu="listClicked();return false;" id="userList">
+        </div>
+        <div class="chat inDiv" id="chat"></div>
+        <br>
+
+        <input type="text" id="messageInput" maxlength="500">
+        <button onclick="sendMessage()">Send</button>
+
+    </div>
+
+</body>

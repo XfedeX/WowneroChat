@@ -1,0 +1,17 @@
+.testedDiv {
+    display: inline-block;
+    width: 125px;
+    height: 125px;
+    background-color: black;
+    text-align: center;
+    border-radius: 10px;
+    user-select: none;
+    margin: 5px;
+
+}
+.noDrg {
+    -moz-user-drag:false;
+    pointer-events: none;
+    max-width: 120px;
+    max-height: 120px;
+}
